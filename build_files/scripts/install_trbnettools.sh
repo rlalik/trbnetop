@@ -26,6 +26,7 @@ cd $PANDA_TRB_DISTDIR/trbnettools
 git checkout $TRBNET_COMMIT
 
 patch -p1 < $PANDA_TRB_BASEDIR/build_files/libtrbnet_tirpc_includes.patch
+patch -p1 < $PANDA_TRB_BASEDIR/build_files/libtrbnet_missing_symbols.patch
 
 echo "*** Build trbnettools ***"
 make distclean

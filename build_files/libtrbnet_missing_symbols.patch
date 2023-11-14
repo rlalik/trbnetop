@@ -1,0 +1,22 @@
+diff --git a/trbnetd/Makefile b/trbnetd/Makefile
+index 4aa7d28..87bad98 100644
+--- a/trbnetd/Makefile
++++ b/trbnetd/Makefile
+@@ -22,7 +22,7 @@ CXXFLAGS = -pipe -g -Wall
+ LD = $(CC)
+ #LD = $(CXX)
+ 
+-LDFLAGS = 
++LDFLAGS = -Wl,--no-undefined
+ LIBDIR = 
+ LOADLIBES = -lm -ltirpc
+ 
+@@ -67,7 +67,7 @@ ARFLAGS = -srv
+ 
+ %.so: $%
+ 	@echo CREATING shared library $@
+-	$(LD) -shared $(LOADLIBES) -O $^ -o $@
++	$(LD) -shared $(LDFLAGS) -O $^ -o $@ $(LOADLIBES)
+ 	@echo DONE!
+ 
+ # RPCGEN
