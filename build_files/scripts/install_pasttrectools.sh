@@ -1,7 +1,7 @@
 #!/bin/bash
 
 if $TRB_DOCKER_ENV; then
-    echo "I'm inside matrix ;(";
+    true
 else
     . scripts/environment.sh
     [ -n "$1" ] && njobs=$1
@@ -19,12 +19,10 @@ mkdir -p $PANDA_TRB_DISTDIR
 echo "*** Prepare pasttrectools ***"
 
 cd $PANDA_TRB_DISTDIR/
-[ -d pasttrectools ] || \
-{
-    git clone https://github.com/HADES-Cracovia/pasttrectools
 
-    cd pasttrectools
-    git checkout trb_3_5_merge
+git clone https://github.com/HADES-Cracovia/pasttrectools
 
-    pip install .
-}
+cd pasttrectools
+git checkout trb_3_5_merge
+
+pip install .

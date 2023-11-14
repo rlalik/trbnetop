@@ -1,12 +1,12 @@
 #!/bin/bash
 
 if $TRB_DOCKER_ENV; then
-    echo "I'm inside matrix ;(";
+    true
 else
     . scripts/environment.sh
 fi
 
-echo "*** Update system ***"
+echo "*** Install build tools ***"
 
 $SUDO apt-get update -qq
 

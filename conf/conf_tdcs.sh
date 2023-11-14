@@ -3,9 +3,11 @@
 
 ## this script is called by conf.sh ##
 
+echo "configure tdcs"
+
 ### all tdcs ###
 
-for TDC in 0x0350 0x0351 0x0352 0x0353; do
+for TDC in 0xfe81; do
 
 	# invert the first 32 channels
 	#trbcmd w $TDC 0xc805 0xFFFFFFFF

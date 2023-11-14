@@ -1,7 +1,7 @@
 #!/bin/bash
 
 if $TRB_DOCKER_ENV; then
-    echo "I'm inside matrix ;(";
+    true
 else
     . scripts/environment.sh
     [ -n "$1" ] && njobs=$1
@@ -18,16 +18,14 @@ mkdir -p $PANDA_TRB_DISTDIR
 echo "*** Prepare daqtools ***"
 
 cd $PANDA_TRB_DISTDIR
-[ -d daqtools ] || \
-{
-    git clone git://jspc29.x-matter.uni-frankfurt.de/projects/daqtools.git
 
-    cd $PANDA_TRB_DISTDIR/daqtools
-    git checkout $DAQTOOLS_COMMIT
+git clone git://jspc29.x-matter.uni-frankfurt.de/projects/daqtools.git
 
-    cd $PANDA_TRB_DISTDIR/daqtools/xml-db
-    ./xml-db.pl
-}
+cd $PANDA_TRB_DISTDIR/daqtools
+git checkout $DAQTOOLS_COMMIT
+
+cd $PANDA_TRB_DISTDIR/daqtools/xml-db
+./xml-db.pl
 
 ##################################################
 ##                  post build                  ##

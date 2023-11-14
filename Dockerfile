@@ -34,22 +34,22 @@ RUN mkdir -p $PANDA_TRB_DISTDIR
 #    /system_update.sh
 
 # This is general for any system
-RUN --mount=type=bind,source=scripts,target=/scripts \
+RUN --mount=type=bind,source=build_files/scripts,target=/scripts \
     /scripts/system_update.sh
 
-RUN --mount=type=bind,source=scripts,target=/scripts \
+RUN --mount=type=bind,source=build_files/scripts,target=/scripts \
     /scripts/system_build_tools.sh
 
 COPY build_files /build_files
 
-RUN --mount=type=bind,source=scripts,target=/scripts \
+RUN --mount=type=bind,source=build_files/scripts,target=/scripts \
     /scripts/install_root.sh && \
     /scripts/install_trb3.sh && \
     /scripts/install_trbnettools.sh && \
     /scripts/install_daqtools.sh && \
     /scripts/install_pasttrectools.sh
 
-RUN --mount=type=bind,source=scripts,target=/scripts \
+RUN --mount=type=bind,source=build_files/scripts,target=/scripts \
     /scripts/system_user_tools.sh
 
 ## cleanup of files from setup
@@ -61,5 +61,4 @@ RUN rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
 COPY build_files/bash_aliases /root/.bash_aliases
 
-COPY scripts/docker_environment.sh /docker_environment.sh
-COPY scripts/update.sh /update.sh
+COPY runtime /runtime
