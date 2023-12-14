@@ -17,7 +17,7 @@ mkdir -p $PANDA_TRB_DISTDIR
 
 echo "*** Prepare ROOT ***"
 
-ROOT_FILE=root_v6.28.08.Linux-ubuntu22-x86_64-gcc11.4.tar.gz
+ROOT_FILE=root_v6.30.02.Linux-ubuntu22.04-x86_64-gcc11.4.tar.gz
 
 mkdir -p $PANDA_TRB_DISTDIR/cern
 cd $PANDA_TRB_DISTDIR/cern
