@@ -3,11 +3,9 @@
 if $TRB_DOCKER_ENV; then
     true
 else
-    . scripts/environment.sh
+    . /scripts/environment.sh
     [ -n "$1" ] && njobs=$1
 fi
-
-echo "*** Running make with $njobs jobs ***"
 
 mkdir -p $PANDA_TRB_DISTDIR
 
@@ -15,7 +13,7 @@ mkdir -p $PANDA_TRB_DISTDIR
 ##                     trb3                     ##
 ##################################################
 
-echo "*** Prepare trb3 ***"
+echo "*** Prepare trb3 using $njobs jobs ***"
 
 cd $PANDA_TRB_DISTDIR
 

@@ -8,25 +8,15 @@ FROM ubuntu:22.04
 ##                prerequisites                 ##
 ##################################################
 
-ENV DABC_TRB3_REV=HEAD
-ENV TRBNET_COMMIT=master
-ENV DAQTOOLS_COMMIT=master
-
-ENV PATH=$PATH:/dist/trbnettools/bin
-ENV ROOTSYS=/dist/cern/root
+ENV TRB_DOCER_ENV=1
 
 ENV PIP_ROOT_USER_ACTION=ignore
-ENV PANDA_TRB_DISTDIR=/dist
-
-ENV TRB_DOCER_ENV=1
 
 ##################################################
 ##                    build                     ##
 ##################################################
 
-RUN mkdir -p $PANDA_TRB_DISTDIR
-
-# For ubuntu systemsto speed up instalaltion on can use host cache
+# For ubuntu systems to speed up instalaltion on can use host cache
 #RUN rm -f /etc/apt/apt.conf.d/docker-clean; echo 'Binary::apt::APT::Keep-Downloaded-Packages "true";' > /etc/apt/apt.conf.d/keep-cache
 #RUN --mount=type=cache,target=/var/cache/apt,sharing=locked \
 #    --mount=type=cache,target=/var/lib/apt,sharing=locked \
@@ -40,11 +30,17 @@ RUN --mount=type=bind,source=build_files/scripts,target=/scripts \
 RUN --mount=type=bind,source=build_files/scripts,target=/scripts \
     /scripts/system_build_tools.sh
 
-COPY build_files /build_files
+RUN echo "dash dash/sh boolean false" | debconf-set-selections && \
+    dpkg-reconfigure -p critical dash
 
 RUN --mount=type=bind,source=build_files/scripts,target=/scripts \
+    --mount=type=bind,source=build_files,target=/build_files \
+    . /scripts/environment.sh && \
+    mkdir -p $PANDA_TRB_DISTDIR/ && \
     /scripts/install_root.sh && \
+    . $ROOTSYS/bin/thisroot.sh && \
     /scripts/install_trb3.sh && \
+    . $PANDA_TRB_DISTDIR/trb3/trb3login && \
     /scripts/install_trbnettools.sh && \
     /scripts/install_daqtools.sh && \
     /scripts/install_pasttrectools.sh

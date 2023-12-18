@@ -3,7 +3,7 @@
 if $TRB_DOCKER_ENV; then
     true
 else
-    . scripts/environment.sh
+    . /scripts/environment.sh
 fi
 
 echo "*** Install build tools ***"

@@ -3,11 +3,9 @@
 if $TRB_DOCKER_ENV; then
     true
 else
-    . scripts/environment.sh
+    . /scripts/environment.sh
     [ -n "$1" ] && njobs=$1
 fi
-
-echo "*** Running make with $njobs jobs ***"
 
 mkdir -p $PANDA_TRB_DISTDIR
 
@@ -16,7 +14,7 @@ mkdir -p $PANDA_TRB_DISTDIR
 ##                  trbnettools                 ##
 ##################################################
 
-echo "*** Prepare trbnettools ***"
+echo "*** Prepare trbnettools using $njobs jobs ***"
 
 cd $PANDA_TRB_DISTDIR
 
@@ -32,10 +30,12 @@ echo "*** Build trbnettools ***"
 make distclean
 make TRB3=1
 make TRB3=1 install
-$SUDO make -C libtrbnet_perl TRB3=1 install
+make -C libtrbnet_perl TRB3=1 install
 
 cd $PANDA_TRB_DISTDIR/trbnettools/libtrbnet_python
 pip install .
 
+echo "*** Update ldconfig"
 echo "$PANDA_TRB_DISTDIR/trbnettools/lib" | $SUDO tee /etc/ld.so.conf.d/trbnet.conf
 $SUDO ldconfig
+echo "*** [done]"

@@ -3,7 +3,7 @@
 if $TRB_DOCKER_ENV; then
     true
 else
-    . scripts/environment.sh
+    . /scripts/environment.sh
 fi
 
 echo "*** Install build tools ***"
@@ -15,6 +15,7 @@ $SUDO apt-get install -yqq \
     cmake-curses-gui \
     git \
     g++ \
+    libafterimage0 \
     libdata-treedumper-perl \
     libfile-chdir-perl \
     libtirpc-dev \
