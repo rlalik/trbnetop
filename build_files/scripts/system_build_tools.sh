@@ -27,4 +27,7 @@ $SUDO apt-get install -yqq \
     pip \
     pkg-config \
     subversion \
-    wget
+    wget && \
+    \
+    \
+    pip install -U pip colorama
