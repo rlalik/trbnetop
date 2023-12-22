@@ -3,7 +3,7 @@
 
 ## this script is called by conf.sh ##
 
-echo "configure tdcs"
+echo "*** Configure TDCs"
 
 ### all tdcs ###
 

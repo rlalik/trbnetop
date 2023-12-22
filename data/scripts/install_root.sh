@@ -1,11 +1,8 @@
 #!/bin/bash
 
-if $TRB_DOCKER_ENV; then
-    true
-else
-    . /scripts/environment.sh
-    [ -n "$1" ] && njobs=$1
-fi
+. $(dirname ${BASH_SOURCE[0]})/../runtime/environment.sh
+
+[ -n "$1" ] && njobs=$1
 
 mkdir -p $PANDA_TRB_DISTDIR
 
@@ -13,7 +10,7 @@ mkdir -p $PANDA_TRB_DISTDIR
 ##                  CERN's ROOT                 ##
 ##################################################
 
-echo "*** Prepare ROOT ***"
+echo -e "\n*** Prepare ROOT ***"
 
 if ! command -v root-config &> /dev/null
 then

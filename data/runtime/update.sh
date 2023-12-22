@@ -1,18 +1,14 @@
 #!/bin/bash
 
-if $TRB_DOCKER_ENV; then
-    . docker_environment.sh
-else
-    . scripts/environment.sh
-    [ -n "$1" ] && njobs=$1
-fi
+. $(dirname ${BASH_SOURCE[0]})/../runtime/environment.sh
 
+[ -n "$1" ] && njobs=$1
 
 ##################################################
 ##                     trb3                     ##
 ##################################################
 
-echo "*** Update trb3 ***"
+echo -e "\n*** Update trb3 ***"
 
 cd $PANDA_TRB_DISTDIR/trb3/
 . $PANDA_TRB_DISTDIR/trb3/trb3login
@@ -23,7 +19,7 @@ make -j$njobs update
 ##                  trbnettools                 ##
 ##################################################
 
-echo "*** Update trbnettools ***"
+echo -e "\n*** Update trbnettools ***"
 
 cd $PANDA_TRB_DISTDIR/trbnettools
 git pull
@@ -44,7 +40,7 @@ pip install --force-reinstall .
 ##                   daqtools                   ##
 ##################################################
 
-echo "*** Update daqtools ***"
+echo -e "\n*** Update daqtools ***"
 
 cd $PANDA_TRB_DISTDIR/daqtools
 git pull
@@ -56,7 +52,7 @@ cd $PANDA_TRB_DISTDIR/daqtools/xml-db
 ##                pasttrectools                 ##
 ##################################################
 
-echo "*** Update pasttrectools ***"
+echo -e "\n*** Update pasttrectools ***"
 
 cd $PANDA_TRB_DISTDIR/pasttrectools
 git pull
@@ -66,13 +62,12 @@ pip install --force-reinstall .
 ##                  post build                  ##
 ##################################################
 
-echo "*** Post build ***"
+echo -e "\n*** Post build ***"
 
 ### replace httpi with a modified version, because the httpi in daqtools won't run as root
-cp -v $PANDA_TRB_BASEDIR/build_files/httpi $PANDA_TRB_DISTDIR/daqtools/web/httpi
+cp -v $PANDA_TRB_BASEDIR/data/httpi $PANDA_TRB_DISTDIR/daqtools/web/httpi
 
 if [ -f /.dockerenv ]; then
-    echo "I'm inside matrix ;(";
 else
-    . $PANDA_TRB_BASEDIR/build_files/bash_aliases
+    . $PANDA_TRB_BASEDIR/data/bash_aliases
 fi

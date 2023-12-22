@@ -2,13 +2,10 @@
 
 cd $PANDA_TRB_BASEDIR/conf
 
+echo "*** Configure system container"
 
-
-echo "configure system container"
-
-provide_dhcp=yes
+provide_dhcp=no
 #edit conf/dhcpd.conf, enter your trb3 MAC address ###
-
 
 ### no need to touch the rest of the file ###
 

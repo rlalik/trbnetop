@@ -1,11 +1,8 @@
 #!/bin/bash
 
-if $TRB_DOCKER_ENV; then
-    true
-else
-    . /scripts/environment.sh
-    [ -n "$1" ] && njobs=$1
-fi
+. $(dirname ${BASH_SOURCE[0]})/../runtime/environment.sh
+
+[ -n "$1" ] && njobs=$1
 
 mkdir -p $PANDA_TRB_DISTDIR
 
@@ -14,7 +11,9 @@ mkdir -p $PANDA_TRB_DISTDIR
 ##                pasttrectools                 ##
 ##################################################
 
-echo "*** Prepare pasttrectools using $njobs jobs ***"
+echo -e "\n*** Prepare pasttrectools using $njobs jobs ***"
+
+pip install -U pip colorama
 
 cd $PANDA_TRB_DISTDIR/
 

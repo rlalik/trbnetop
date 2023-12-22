@@ -1,12 +1,8 @@
 #!/bin/bash
 
-if $TRB_DOCKER_ENV; then
-    true
-else
-    . /scripts/environment.sh
-fi
+. $(dirname ${BASH_SOURCE[0]})/../runtime/detect_environment.sh
 
-echo "*** Install user tools ***"
+echo -e "\n*** Install user tools ***"
 
 DEBIAN_FRONTEND=noninteractive \
 DEBCONF_NONINTERACTIVE_SEEN=true \

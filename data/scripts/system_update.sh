@@ -1,12 +1,8 @@
 #!/bin/bash
 
-if $TRB_DOCKER_ENV; then
-    true
-else
-    . /scripts/environment.sh
-fi
+. $(dirname ${BASH_SOURCE[0]})/../runtime/detect_environment.sh
 
-echo "*** Install build tools ***"
+echo -e "\n*** Update system ***"
 
 $SUDO apt-get update -qq
 

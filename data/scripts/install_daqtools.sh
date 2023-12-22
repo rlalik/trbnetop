@@ -1,11 +1,8 @@
 #!/bin/bash
 
-if $TRB_DOCKER_ENV; then
-    true
-else
-    . /scripts/environment.sh
-    [ -n "$1" ] && njobs=$1
-fi
+. $(dirname ${BASH_SOURCE[0]})/../runtime/environment.sh
+
+[ -n "$1" ] && njobs=$1
 
 mkdir -p $PANDA_TRB_DISTDIR
 
@@ -13,7 +10,7 @@ mkdir -p $PANDA_TRB_DISTDIR
 ##                   daqtools                   ##
 ##################################################
 
-echo "*** Prepare daqtools using $njobs jobs ***"
+echo -e "\n*** Prepare daqtools using $njobs jobs ***"
 
 cd $PANDA_TRB_DISTDIR
 
@@ -29,7 +26,7 @@ cd $PANDA_TRB_DISTDIR/daqtools/xml-db
 ##                  post build                  ##
 ##################################################
 
-echo "*** Post build ***"
+echo -e "\n*** Post build ***"
 
 ### replace httpi with a modified version, because the httpi in daqtools won't run as root
-cp -v $PANDA_TRB_BASEDIR/build_files/httpi $PANDA_TRB_DISTDIR/daqtools/web/httpi
+cp -v $PANDA_TRB_BASEDIR/data/httpi $PANDA_TRB_DISTDIR/daqtools/web/httpi

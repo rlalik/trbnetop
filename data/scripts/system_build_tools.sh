@@ -1,12 +1,6 @@
 #!/bin/bash
 
-if $TRB_DOCKER_ENV; then
-    true
-else
-    . /scripts/environment.sh
-fi
-
-echo "*** Install build tools ***"
+. $(dirname ${BASH_SOURCE[0]})/../runtime/detect_environment.sh
 
 DEBIAN_FRONTEND=noninteractive \
 DEBCONF_NONINTERACTIVE_SEEN=true \
@@ -27,7 +21,4 @@ $SUDO apt-get install -yqq \
     pip \
     pkg-config \
     subversion \
-    wget && \
-    \
-    \
-    pip install -U pip colorama
+    wget

@@ -1,13 +1,13 @@
 #!/bin/bash
 
-cd $PANDA_TRB_BASEDIR/conf
+echo "*** Container profile"
 
-echo "configure container"
-
+# trbnet
 export TRB3_PORT=35
 export DAQOPSERVER=localhost:$TRB3_PORT
-export TRB3_SERVER=192.168.5.24
+export TRB3_SERVER=
 
+# tools
 export CTS_GUI_PORT=1148
 export CTS_ENDPOINT=0xc035
 
