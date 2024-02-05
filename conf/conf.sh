@@ -1,10 +1,8 @@
 #!/bin/bash
 
-cd $PANDA_TRB_BASEDIR/conf
-
 echo "*** Configure trbnet system"
 
-. profile.sh
+. $TRBOP_BASEDIR/conf/profile.sh
 
 if [ -z $TRB3_SERVER ]; then
     echo "*** ERROR: Please set \$TRB3_SERVER in conf/profile.sh before you start the container."
@@ -13,11 +11,11 @@ fi
 
 trbcmd reset
 
-./addresses.sh
+$TRBOP_BASEDIR/conf/addresses.sh
 
-./conf_cts.sh
+$TRBOP_BASEDIR/conf/conf_cts.sh
 
-./conf_tdcs.sh
+$TRBOP_BASEDIR/conf/conf_tdcs.sh
 
-$PANDA_TRB_DISTDIR/daqtools/tools/loadregisterdb.pl register_configgbe.db
-$PANDA_TRB_DISTDIR/daqtools/tools/loadregisterdb.pl register_configgbe_ip.db
+$TRBOP_DISTDIR/daqtools/tools/loadregisterdb.pl $TRBOP_BASEDIR/conf/register_configgbe.db
+$TRBOP_DISTDIR/daqtools/tools/loadregisterdb.pl $TRBOP_BASEDIR/conf/register_configgbe_ip.db

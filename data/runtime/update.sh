@@ -10,8 +10,8 @@
 
 echo -e "\n*** Update trb3 ***"
 
-cd $PANDA_TRB_DISTDIR/trb3/
-. $PANDA_TRB_DISTDIR/trb3/trb3login
+cd $TRBOP_DISTDIR/trb3/
+. $TRBOP_DISTDIR/trb3/trb3login
 make -j$njobs update
 
 
@@ -21,18 +21,18 @@ make -j$njobs update
 
 echo -e "\n*** Update trbnettools ***"
 
-cd $PANDA_TRB_DISTDIR/trbnettools
+cd $TRBOP_DISTDIR/trbnettools
 git pull
 make TRB3=1 -j$njobs
 make -C libtrbnet install
 make -C trbrich install
 make -C trbnetd install
 
-cd $PANDA_TRB_DISTDIR/trbnettools/libtrbnet_perl
+cd $TRBOP_DISTDIR/trbnettools/libtrbnet_perl
 perl Makefile.PL
 $SUDO make
 
-cd $PANDA_TRB_DISTDIR/trbnettools/libtrbnet_python
+cd $TRBOP_DISTDIR/trbnettools/libtrbnet_python
 pip install --force-reinstall .
 
 
@@ -42,9 +42,9 @@ pip install --force-reinstall .
 
 echo -e "\n*** Update daqtools ***"
 
-cd $PANDA_TRB_DISTDIR/daqtools
+cd $TRBOP_DISTDIR/daqtools
 git pull
-cd $PANDA_TRB_DISTDIR/daqtools/xml-db
+cd $TRBOP_DISTDIR/daqtools/xml-db
 ./xml-db.pl
 
 
@@ -54,7 +54,7 @@ cd $PANDA_TRB_DISTDIR/daqtools/xml-db
 
 echo -e "\n*** Update pasttrectools ***"
 
-cd $PANDA_TRB_DISTDIR/pasttrectools
+cd $TRBOP_DISTDIR/pasttrectools
 git pull
 pip install --force-reinstall .
 
@@ -65,9 +65,9 @@ pip install --force-reinstall .
 echo -e "\n*** Post build ***"
 
 ### replace httpi with a modified version, because the httpi in daqtools won't run as root
-cp -v $PANDA_TRB_BASEDIR/data/httpi $PANDA_TRB_DISTDIR/daqtools/web/httpi
+cp -v $TRBOP_BASEDIR/data/httpi $TRBOP_DISTDIR/daqtools/web/httpi
 
 if [ -f /.dockerenv ]; then
 else
-    . $PANDA_TRB_BASEDIR/data/bash_aliases
+    . $TRBOP_BASEDIR/data/bash_aliases
 fi

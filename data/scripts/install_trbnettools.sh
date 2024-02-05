@@ -4,9 +4,9 @@
 
 [ -n "$1" ] && njobs=$1
 
-. $PANDA_TRB_BASEDIR/data/runtime/helper.sh
+. $TRBOP_BASEDIR/data/runtime/helper.sh
 
-mkdir -p $PANDA_TRB_DISTDIR
+mkdir -p $TRBOP_DISTDIR
 
 ##################################################
 ##                  trbnettools                 ##
@@ -14,16 +14,23 @@ mkdir -p $PANDA_TRB_DISTDIR
 
 echo -e "\n*** Prepare trbnettools using $njobs jobs ***"
 
-cd $PANDA_TRB_DISTDIR
+cd $TRBOP_DISTDIR
 
-git clone git://jspc29.x-matter.uni-frankfurt.de/projects/trbnettools.git
+if [ ! -d trbnettools ]; then
+    git clone git://jspc29.x-matter.uni-frankfurt.de/projects/trbnettools.git
+    cd $TRBOP_DISTDIR/trbnettools
 
-cd $PANDA_TRB_DISTDIR/trbnettools
-git checkout $TRBNET_COMMIT
+    git checkout $TRBNET_COMMIT
 
-echo -e "\n*** Patch trbnettools ***"
-patch -p1 < $PANDA_TRB_BASEDIR/data/libtrbnet_tirpc_includes.patch
-patch -p1 < $PANDA_TRB_BASEDIR/data/libtrbnet_missing_symbols.patch
+    echo -e "\n*** Patch trbnettools ***"
+    patch -p1 < $TRBOP_BASEDIR/data/libtrbnet_tirpc_includes.patch
+    patch -p1 < $TRBOP_BASEDIR/data/libtrbnet_missing_symbols.patch
+else
+    cd $TRBOP_DISTDIR/trbnettools
+
+    git checkout $TRBNET_COMMIT
+    git pull
+fi
 
 echo -e "\n*** Build trbnettools ***"
 try make distclean
@@ -31,10 +38,10 @@ try make TRB3=1
 try make TRB3=1 install
 try make -C libtrbnet_perl TRB3=1 install
 
-cd $PANDA_TRB_DISTDIR/trbnettools/libtrbnet_python
+cd $TRBOP_DISTDIR/trbnettools/libtrbnet_python
 try pip install .
 
 echo -e "\n*** Update ldconfig"
-echo "$PANDA_TRB_DISTDIR/trbnettools/lib" | $SUDO tee /etc/ld.so.conf.d/trbnet.conf
+echo "$TRBOP_DISTDIR/trbnettools/lib" | $SUDO tee /etc/ld.so.conf.d/trbnet.conf
 $SUDO ldconfig
 echo -e "\n*** [done]"

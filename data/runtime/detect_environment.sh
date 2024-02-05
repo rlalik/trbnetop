@@ -1,13 +1,22 @@
 #!/bin/bash
 
+echo -n "Detecting environment... "
+
 # entry
 if [ -n "${TRB_DOCKER_ENV+x}" ]; then
     # docker run
-    export PANDA_TRB_BASEDIR=/
+    echo "DOCKER"
+
+    export TRBOP_BASEDIR=/
 else
     # local run
-    export PANDA_TRB_BASEDIR=$(readlink -e $(dirname ${BASH_SOURCE[0]})/../..)
+    echo "Local"
+
+    export TRBOP_BASEDIR=$(readlink -e $(dirname ${BASH_SOURCE[0]})/../..)
+
     export SUDO=sudo
+
+    . $TRBOP_BASEDIR/data/bash_aliases
 fi
 
-export PANDA_TRB_DISTDIR=$PANDA_TRB_BASEDIR/dist
+export TRBOP_DISTDIR=$TRBOP_BASEDIR/dist

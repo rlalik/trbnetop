@@ -24,13 +24,13 @@ fi
 
 echo -e "\n*** Running bootstrap using $njobs jobs ***"
 
-mkdir -p $PANDA_TRB_DISTDIR
+mkdir -p $TRBOP_DISTDIR
 
 ./data/scripts/install_root.sh $njobs
 
 ./data/scripts/install_trb3.sh $njobs
 
-. $PANDA_TRB_DISTDIR/trb3/trb3login
+. $TRBOP_DISTDIR/trb3/trb3login
 
 ./data/scripts/install_trbnettools.sh $njobs
 
@@ -47,5 +47,5 @@ echo -e "\n*** Post build ***"
 if $TRB_DOCKER_ENV; then
     true
 else
-    . $PANDA_TRB_BASEDIR/data/bash_aliases
+    . $TRBOP_BASEDIR/data/bash_aliases
 fi

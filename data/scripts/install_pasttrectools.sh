@@ -4,7 +4,7 @@
 
 [ -n "$1" ] && njobs=$1
 
-mkdir -p $PANDA_TRB_DISTDIR
+mkdir -p $TRBOP_DISTDIR
 
 
 ##################################################
@@ -15,10 +15,14 @@ echo -e "\n*** Prepare pasttrectools using $njobs jobs ***"
 
 pip install -U pip colorama
 
-cd $PANDA_TRB_DISTDIR/
+cd $TRBOP_DISTDIR/
 
-git clone https://github.com/HADES-Cracovia/pasttrectools
+if [ ! -d pasttrectools ]; then
+    git clone https://github.com/HADES-Cracovia/pasttrectools
+    cd pasttrectools
+else
+    cd pasttrectools
+    git pull
+fi
 
-cd pasttrectools
-
-pip install .
+pip install -U .

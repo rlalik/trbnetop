@@ -4,7 +4,7 @@
 
 [ -n "$1" ] && njobs=$1
 
-mkdir -p $PANDA_TRB_DISTDIR
+mkdir -p $TRBOP_DISTDIR
 
 ##################################################
 ##                     trb3                     ##
@@ -12,10 +12,15 @@ mkdir -p $PANDA_TRB_DISTDIR
 
 echo -e "\n*** Prepare trb3 using $njobs jobs ***"
 
-cd $PANDA_TRB_DISTDIR
+cd $TRBOP_DISTDIR
 
-svn checkout -q -r $DABC_TRB3_REV https://subversion.gsi.de/dabc/trb3
+if [ ! -d trb3 ]; then
+    svn checkout -q -r $DABC_TRB3_REV https://subversion.gsi.de/dabc/trb3
+    cd $TRBOP_DISTDIR/trb3
 
-cd $PANDA_TRB_DISTDIR/trb3
-sed -e "s/^source /. /g" -i $PANDA_TRB_DISTDIR/trb3/Makefile
+    sed -e "s/^source /. /g" -i $TRBOP_DISTDIR/trb3/Makefile
+else
+    cd $TRBOP_DISTDIR/trb3
+fi
+
 make -j$njobs compile

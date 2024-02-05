@@ -67,8 +67,8 @@ This repository provides easy way to create docker. However, the whole system ca
 ### DHCP
 In the docker we have fully isolated DHCP server and we configure it to use only for our system. In the host the DHCP can be configured to provide services for other systems. Thus the docker `/work/start.sh` calls two configure scripts:
 ```bash
-$PANDA_TRB_BASEDIR/conf/system_conf.sh
-. $PANDA_TRB_BASEDIR/conf/user_conf.sh
+$TRBOP_BASEDIR/conf/system_conf.sh
+. $TRBOP_BASEDIR/conf/user_conf.sh
 ```
 The `system_conf.sh` configures the DHCP server. In the host environment, you would rather need to configure it manually (and you need root proviledges for that). Most likely you want to copy parts of `conf/dhcpd.conf` into your system configuration. We will need expxlain this operation here -- if you do not know how to do it already, you are clearly not experienced enough and consider using docker.
 

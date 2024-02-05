@@ -4,7 +4,7 @@
 
 [ -n "$1" ] && njobs=$1
 
-mkdir -p $PANDA_TRB_DISTDIR
+mkdir -p $TRBOP_DISTDIR
 
 ##################################################
 ##                   daqtools                   ##
@@ -12,14 +12,22 @@ mkdir -p $PANDA_TRB_DISTDIR
 
 echo -e "\n*** Prepare daqtools using $njobs jobs ***"
 
-cd $PANDA_TRB_DISTDIR
+cd $TRBOP_DISTDIR
 
-git clone git://jspc29.x-matter.uni-frankfurt.de/projects/daqtools.git
+if [ ! -d daqtools ]; then
+    git clone git://jspc29.x-matter.uni-frankfurt.de/projects/daqtools.git
 
-cd $PANDA_TRB_DISTDIR/daqtools
-git checkout $DAQTOOLS_COMMIT
+    cd $TRBOP_DISTDIR/daqtools
 
-cd $PANDA_TRB_DISTDIR/daqtools/xml-db
+    git checkout $DAQTOOLS_COMMIT
+else
+    cd $TRBOP_DISTDIR/daqtools
+
+    git checkout $DAQTOOLS_COMMIT
+    git pull
+fi
+
+cd $TRBOP_DISTDIR/daqtools/xml-db
 ./xml-db.pl
 
 ##################################################
@@ -29,4 +37,4 @@ cd $PANDA_TRB_DISTDIR/daqtools/xml-db
 echo -e "\n*** Post build ***"
 
 ### replace httpi with a modified version, because the httpi in daqtools won't run as root
-cp -v $PANDA_TRB_BASEDIR/data/httpi $PANDA_TRB_DISTDIR/daqtools/web/httpi
+cp -v $TRBOP_BASEDIR/data/httpi $TRBOP_DISTDIR/daqtools/web/httpi

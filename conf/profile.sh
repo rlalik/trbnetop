@@ -15,4 +15,4 @@ export GO4_WEB_PORT=8080
 
 export DISPLAY=:2 # go4 window will be sent to $DISPLAY, if provide_vnc == yes , then it will be this x11 display
 
-export CONF_LOG=$PANDA_TRB_BASEDIR/conf/conf_log.txt
+export CONF_LOG=$TRBOP_BASEDIR/conf/conf_log.txt

@@ -39,11 +39,11 @@ ARG LAST_BUILD_DATE=unknown
 
 RUN --mount=type=bind,source=data/,target=/data \
     . /data/runtime/environment.sh && \
-    mkdir -p $PANDA_TRB_DISTDIR/ && \
+    mkdir -p $TRBOP_DISTDIR/ && \
     /data/scripts/install_root.sh && \
     . $ROOTSYS/bin/thisroot.sh && \
     /data/scripts/install_trb3.sh && \
-    . $PANDA_TRB_DISTDIR/trb3/trb3login && \
+    . $TRBOP_DISTDIR/trb3/trb3login && \
     /data/scripts/install_trbnettools.sh && \
     /data/scripts/install_daqtools.sh && \
     /data/scripts/install_pasttrectools.sh
@@ -60,7 +60,7 @@ RUN rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
 COPY data/bash_aliases /root/.bash_aliases
 
-COPY data/runtime /runtime
+COPY data/runtime /data/runtime
 
 RUN echo "System installed on $LAST_SYSTEM_DATE"
 RUN echo "Last tools build on $LAST_BUILD_DATE"
