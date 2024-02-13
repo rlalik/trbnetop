@@ -1,12 +1,12 @@
 #!/bin/bash
 
-. data/runtime/environment.sh
+. $(dirname ${BASH_SOURCE[0]})/data/runtime/environment.sh
 
 export provide_trbnetd=yes
 #export provide_cts_gui=yes
 #export provide_vnc=yes
 
-. workdir/session_prepare.sh
+. $(dirname ${BASH_SOURCE[0]})/workdir/session_prepare.sh
 
 NEW_PS1="(trbnetop) ${PS1-}"
 if [[ "${NEW_PS1+x}" != "${TRBNET_OLD_PS1+x}" ]]; then
