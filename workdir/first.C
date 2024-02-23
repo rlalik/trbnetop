@@ -15,12 +15,12 @@ void first()
    hadaq::TdcMessage::SetFineLimits(10, 510);
 
    // default channel numbers and edges mask
-   hadaq::TrbProcessor::SetDefaults(33, 0x2);
+   hadaq::TrbProcessor::SetDefaults(65, 0x2);
 //    hadaq::TdcProcessor::SetDefaults(1000);
    //hadaq::TdcProcessor::DisableCalibrationFor(0,8);
    // [min..max] range for TDC ids
    //hadaq::TrbProcessor::SetTDCRange(0x610, 0x613);
-   hadaq::TrbProcessor::SetTDCRange(0x0350, 0x0353);
+   hadaq::TrbProcessor::SetTDCRange(0x2000, 0x2fff);
 
    // configure ToT calibration parameters
    // first - minimal number of counts in ToT histogram

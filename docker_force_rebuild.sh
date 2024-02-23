@@ -9,6 +9,7 @@ export DOCKER_BUILDKIT=1
 echo Building new image $image_name...
 docker build $@ \
     --build-arg LAST_SYSTEM_DATE="$(git log -n 1 --pretty=format:%cd --date=format:'%F %T')" \
+    --build-arg FORCE_UPDATE="$(date +'%F %T')" \
     -t $image_name \
     -f Dockerfile \
     --progress=plain \

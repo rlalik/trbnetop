@@ -1,5 +1,7 @@
 #!/bin/bash
 
+echo -n "*** Loading environment... "
+
 # based on https://stackoverflow.com/questions/49857332/bash-exit-from-sourced-script
 if [[ "$0" != "$BASH_SOURCE" ]]; then
     sourced=1
@@ -15,7 +17,7 @@ if [ -n "${TRBOP_BASEDIR+x}" ]; then
 fi
 
 
-. $(dirname ${BASH_SOURCE[0]})/detect_environment.sh
+. $(dirname ${BASH_SOURCE[0]})/detect_host_system.sh
 
 export PATH=$TRBOP_DISTDIR/trbnettools/bin:$PATH
 export LIBTRBNET=$TRBOP_DISTDIR/trbnettools/lib/libtrbnet.so

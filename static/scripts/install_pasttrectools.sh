@@ -25,4 +25,5 @@ else
     git pull
 fi
 
+pip install -r requirements.txt
 pip install -U .

@@ -1,6 +1,6 @@
 #!/bin/bash
 
-. $(dirname ${BASH_SOURCE[0]})/data/runtime/environment.sh
+. $(dirname ${BASH_SOURCE[0]})/static/runtime/environment.sh
 
 export provide_trbnetd=yes
 #export provide_cts_gui=yes

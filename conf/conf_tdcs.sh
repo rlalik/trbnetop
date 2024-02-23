@@ -15,6 +15,10 @@ for TDC in 0xfe81; do
 	# enable trigger windows +-1000 ns
 	trbcmd w $TDC 0xc801 0x80c800c8
 
+	# enable channels data
+	trbcmd w $TDC 0xc802 0xffffffff
+	trbcmd w $TDC 0xc803 0xffffffff
+
 	# set channel ringbuffer size
 	trbcmd w $TDC 0xc804 10
 

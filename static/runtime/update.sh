@@ -65,9 +65,9 @@ pip install --force-reinstall .
 echo -e "\n*** Post build ***"
 
 ### replace httpi with a modified version, because the httpi in daqtools won't run as root
-cp -v $TRBOP_BASEDIR/data/httpi $TRBOP_DISTDIR/daqtools/web/httpi
+cp -v $TRBOP_BASEDIR/static/httpi $TRBOP_DISTDIR/daqtools/web/httpi
 
 if [ -f /.dockerenv ]; then
 else
-    . $TRBOP_BASEDIR/data/bash_aliases
+    . $TRBOP_BASEDIR/static/bash_aliases
 fi

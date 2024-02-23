@@ -12,7 +12,7 @@ else
 
     [ ${DISTRIB_ID} != "Ubuntu" ] && { echo -e "Ubuntu system required"; exit 10; }
 
-    . data/scripts/vercomp.sh
+    . static/scripts/vercomp.sh
     UBUNTY_REQ_VERSION=22.04
     vercomp ${DISTRIB_RELEASE} ${UBUNTY_REQ_VERSION}
     [ $? = "2" ] && { echo -e "Ubuntu system required at least in version ${UBUNTY_REQ_VERSION}"; exit 10; }
@@ -20,23 +20,23 @@ else
     [ -n "$1" ] && njobs=$1
 fi
 
-. ./data/runtime/environment.sh
+. ./static/runtime/environment.sh
 
 echo -e "\n*** Running bootstrap using $njobs jobs ***"
 
 mkdir -p $TRBOP_DISTDIR
 
-./data/scripts/install_root.sh $njobs
+./static/scripts/install_root.sh $njobs
 
-./data/scripts/install_trb3.sh $njobs
+./static/scripts/install_trb3.sh $njobs
 
 . $TRBOP_DISTDIR/trb3/trb3login
 
-./data/scripts/install_trbnettools.sh $njobs
+./static/scripts/install_trbnettools.sh $njobs
 
-./data/scripts/install_daqtools.sh $njobs
+./static/scripts/install_daqtools.sh $njobs
 
-./data/scripts/install_pasttrectools.sh $njobs
+./static/scripts/install_pasttrectools.sh $njobs
 
 ##################################################
 ##                  post build                  ##
@@ -47,5 +47,5 @@ echo -e "\n*** Post build ***"
 if $TRB_DOCKER_ENV; then
     true
 else
-    . $TRBOP_BASEDIR/data/bash_aliases
+    . $TRBOP_BASEDIR/static/bash_aliases
 fi

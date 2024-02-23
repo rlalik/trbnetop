@@ -1,6 +1,6 @@
 #!/bin/bash
 
-. $TRBOP_BASEDIR/runtime/environment.sh
+. $TRBOP_BASEDIR/static/runtime/environment.sh
 . $TRBOP_BASEDIR/conf/profile.sh
 
 echo starting vnc server on port $vnc_port for display $DISPLAY

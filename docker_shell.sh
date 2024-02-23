@@ -4,13 +4,13 @@
 . .docker_env.sh
 
 # Run new container
-echo Running new container $container_name...
+echo Running shell for container $container_name...
 docker run \
     --net host \
-    -v $(pwd)/conf:/app/conf \
-    -v $(pwd)/workdir:/app/workdir \
-    -v $(pwd)/static/runtime:/app/static/runtime \
+    -v $(pwd)/conf:/conf \
+    -v $(pwd)/workdir:/workdir \
     -v ~/.bash_history:/root/.bash_history \
     --rm -it \
     --name $container_name \
-    $image_name /app/workdir/session_start.sh
+    $image_name /bin/bash
+

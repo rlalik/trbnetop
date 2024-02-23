@@ -1,13 +1,13 @@
 #!/bin/bash
 
-echo -n "Detecting environment... "
+echo -n "*** Detecting host system... "
 
 # entry
 if [ -n "${TRB_DOCKER_ENV+x}" ]; then
     # docker run
     echo "DOCKER"
 
-    export TRBOP_BASEDIR=/
+    export TRBOP_BASEDIR=/app
 else
     # local run
     echo "Local"
@@ -16,7 +16,7 @@ else
 
     export SUDO=sudo
 
-    . $TRBOP_BASEDIR/data/bash_aliases
+    . $TRBOP_BASEDIR/static/bash_aliases
 fi
 
 export TRBOP_DISTDIR=$TRBOP_BASEDIR/dist

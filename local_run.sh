@@ -1,5 +1,5 @@
 #!/bin/bash
 
-. data/runtime/environment.sh
+. static/runtime/environment.sh
 
-exec data/local/start_local_session.sh
+exec static/local/start_local_session.sh

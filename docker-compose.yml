@@ -1,0 +1,12 @@
+services:
+  trbnetop:
+    container_name: panda_straws
+    build:
+        context: .
+    ports:
+      - 5000:5000
+    volumes:
+      - ./conf:/conf
+      - ./workdir:/workdir
+      - ~/.bash_history:/root/.bash_history
+    entrypoint: /workdir/session_start.sh

@@ -2,7 +2,7 @@
 
 echo "*** Prepare container session"
 
-. $TRBOP_BASEDIR/data/runtime/environment.sh
+. $TRBOP_BASEDIR/static/runtime/environment.sh
 . $TRBOP_BASEDIR/conf/profile.sh
 
 echo logging to $CONF_LOG
@@ -50,7 +50,7 @@ if [ $provide_trbnetd == "yes" ]; then
 fi
 
 if [ $provide_cts_gui == "yes" ]; then
-  tmux new-session -d -s cts_gui -n cts_gui "$TRBOP_BASEDIR/data/runtime/start_cts.sh"
+  tmux new-session -d -s cts_gui -n cts_gui "$TRBOP_BASEDIR/static/runtime/start_cts.sh"
   echo started cts_gui with following parameters:>> $CONF_LOG
   echo --endpoint $CTS_ENDPOINT >> $CONF_LOG
   echo --port $CTS_GUI_PORT >> $CONF_LOG
@@ -60,7 +60,7 @@ fi
 if [ $provide_vnc == "yes" ]; then
   mkdir -p $HOME/.vnc/
   echo $vnc_password | vncpasswd -f > $HOME/.vnc/passwd
-  tmux new-session -d -s cts_gui -n cts_gui "$TRBOP_BASEDIR/data/runtime/start_vnc.sh"
+  tmux new-session -d -s cts_gui -n cts_gui "$TRBOP_BASEDIR/static/runtime/start_vnc.sh"
   
   echo "*** Started vnc server (e.g. for Go4 window)" >> $CONF_LOG
   echo port=$vnc_port >> $CONF_LOG

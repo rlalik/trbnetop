@@ -1,6 +1,6 @@
 #!/bin/bash
 
-. $(dirname ${BASH_SOURCE[0]})/../runtime/detect_environment.sh
+. $(dirname ${BASH_SOURCE[0]})/../runtime/detect_host_system.sh
 
 DEBIAN_FRONTEND=noninteractive \
 DEBCONF_NONINTERACTIVE_SEEN=true \

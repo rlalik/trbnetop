@@ -1,6 +1,7 @@
 #!/bin/bash
 
 echo "*** Start container session"
+. $(dirname ${BASH_SOURCE[0]})/../static/runtime/environment.sh
 
 echo "*** Run /conf/system_conf.sh"
 $TRBOP_BASEDIR/conf/system_conf.sh
@@ -25,13 +26,13 @@ tmux link-window -s cts_gui:cts_gui -t main  # attach window opened by conf.sh
 tmux link-window -s vnc:vnc -t main          # attach window opened by conf.sh
 
 ### start a dabc service
-tmux new-window -t main -n "dabc" "$TRBOP_BASEDIR/data/runtime/start_dabc.sh;/bin/bash"
+tmux new-window -t main -n "dabc" "$TRBOP_BASEDIR/static/runtime/start_dabc.sh;/bin/bash"
 
 ### start a go4 session
 #tmux new-window -t main -n "go4" "rm *.root;  go4 my_hotstart.hotstart;/bin/bash"
 
 ### start a go4analysis session with web server
-tmux new-window -t main -n "go4_ana" "$TRBOP_BASEDIR/data/runtime/start_go4.sh; /bin/bash"
+tmux new-window -t main -n "go4_ana" "$TRBOP_BASEDIR/static/runtime/start_go4.sh; /bin/bash"
 
 ### some new tabs to use for ... whatever
 tmux new-window -t main -n "new" "/bin/bash"
@@ -41,7 +42,7 @@ tmux new-window -t main -n "new" "/bin/bash"
 tmux new-window -t main -n "new" "/bin/bash"
 
 # open CTS GUI and GO4 Web interface in firefox (running in VNC)
-tmux new-window -t main -n "x11_apps" "lxpanel& sleep 5 && $TRBOP_BASEDIR/data/runtime/start_monitoring.sh & /bin/bash"
+tmux new-window -t main -n "x11_apps" "lxpanel& sleep 5 && $TRBOP_BASEDIR/static/runtime/start_monitoring.sh & /bin/bash"
 
 ### select info tab
 tmux select-window -t main:info

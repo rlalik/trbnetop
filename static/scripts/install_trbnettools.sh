@@ -4,7 +4,7 @@
 
 [ -n "$1" ] && njobs=$1
 
-. $TRBOP_BASEDIR/data/runtime/helper.sh
+. $TRBOP_BASEDIR/static/runtime/helper.sh
 
 mkdir -p $TRBOP_DISTDIR
 
@@ -23,8 +23,8 @@ if [ ! -d trbnettools ]; then
     git checkout $TRBNET_COMMIT
 
     echo -e "\n*** Patch trbnettools ***"
-    patch -p1 < $TRBOP_BASEDIR/data/libtrbnet_tirpc_includes.patch
-    patch -p1 < $TRBOP_BASEDIR/data/libtrbnet_missing_symbols.patch
+    patch -p1 < $TRBOP_BASEDIR/static/libtrbnet_tirpc_includes.patch
+    patch -p1 < $TRBOP_BASEDIR/static/libtrbnet_missing_symbols.patch
 else
     cd $TRBOP_DISTDIR/trbnettools
 

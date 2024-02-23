@@ -6,8 +6,8 @@ else
     true
 fi
 
-. data/runtime/detect_environment.sh
+. static/runtime/detect_environment.sh
 
-data/scripts/system_update.sh
-data/scripts/system_build_tools.sh
-data/scripts/system_user_tools.sh
+static/scripts/system_update.sh
+static/scripts/system_build_tools.sh
+static/scripts/system_user_tools.sh

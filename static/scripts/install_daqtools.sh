@@ -37,4 +37,4 @@ cd $TRBOP_DISTDIR/daqtools/xml-db
 echo -e "\n*** Post build ***"
 
 ### replace httpi with a modified version, because the httpi in daqtools won't run as root
-cp -v $TRBOP_BASEDIR/data/httpi $TRBOP_DISTDIR/daqtools/web/httpi
+cp -v $TRBOP_BASEDIR/static/httpi $TRBOP_DISTDIR/daqtools/web/httpi
