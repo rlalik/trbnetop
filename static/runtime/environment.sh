@@ -1,6 +1,6 @@
 #!/bin/bash
 
-echo -n "*** Loading environment... "
+echo "*** Loading environment... "
 
 # based on https://stackoverflow.com/questions/49857332/bash-exit-from-sourced-script
 if [[ "$0" != "$BASH_SOURCE" ]]; then

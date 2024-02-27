@@ -1,5 +1,7 @@
 #!/bin/bash
 
-. static/runtime/environment.sh
+cdir=$(dirname ${BASH_SOURCE[0]})
 
-exec static/local/start_local_session.sh
+. $cdir/static/runtime/environment.sh
+
+exec $cdir/static/local/start_local_session.sh

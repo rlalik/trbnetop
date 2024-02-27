@@ -6,8 +6,10 @@ else
     true
 fi
 
-. static/runtime/detect_environment.sh
+cdir=$(dirname ${BASH_SOURCE[0]})
 
-static/scripts/system_update.sh
-static/scripts/system_build_tools.sh
-static/scripts/system_user_tools.sh
+. $cdir/static/runtime/detect_host_system.sh
+
+$cdir/static/scripts/system_update.sh
+$cdir/static/scripts/system_build_tools.sh
+$cdir/static/scripts/system_user_tools.sh

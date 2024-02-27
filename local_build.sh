@@ -1,5 +1,7 @@
 #!/bin/bash
 
+cdir=$(dirname ${BASH_SOURCE[0]})
+
 njobs=
 
 if [ -n "${TRB_DOCKER_ENV+x}" ]; then
@@ -26,17 +28,17 @@ echo -e "\n*** Running bootstrap using $njobs jobs ***"
 
 mkdir -p $TRBOP_DISTDIR
 
-./static/scripts/install_root.sh $njobs
+$cdir/static/scripts/install_root.sh $njobs
 
-./static/scripts/install_trb3.sh $njobs
+$cdir/static/scripts/install_trb3.sh $njobs
 
 . $TRBOP_DISTDIR/trb3/trb3login
 
-./static/scripts/install_trbnettools.sh $njobs
+$cdir/static/scripts/install_trbnettools.sh $njobs
 
-./static/scripts/install_daqtools.sh $njobs
+$cdir/static/scripts/install_daqtools.sh $njobs
 
-./static/scripts/install_pasttrectools.sh $njobs
+$cdir/static/scripts/install_pasttrectools.sh $njobs
 
 ##################################################
 ##                  post build                  ##
